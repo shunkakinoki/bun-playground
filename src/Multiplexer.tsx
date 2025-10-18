@@ -243,9 +243,9 @@ export const Multiplexer: React.FC<MultiplexerProps> = ({
   const contentHeight = showHelp ? height - 2 : height;
 
   return (
-    <Box flexDirection="column">
+    <Box flexDirection="column" width="100%">
       {/* Layout */}
-      <Box width={width} height={contentHeight}>
+      <Box width="100%" height={contentHeight}>
         {renderLayout(layout, width, contentHeight)}
       </Box>
 
