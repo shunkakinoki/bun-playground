@@ -213,7 +213,10 @@ const App: React.FC = () => {
 
   console.log(`\nLaunching: ${title}\n`);
 
-  return <Multiplexer layout={layout} width={120} height={35} />;
+  return <Multiplexer layout={layout} enterFullScreen={true} />;
 };
 
-render(<App />);
+render(<App />, {
+  patchConsole: false,
+  exitOnCtrlC: false,
+});

@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 /**
- * Simple tmux Multiplexer Example
+ * Tmux-like Multiplexer Example
  * Run with: bun src/tmux-example.tsx
  */
 
@@ -10,6 +10,7 @@ import type { Layout } from './types/multiplexer.js';
 
 /**
  * Simple 2-pane horizontal split with interactive shells
+ * Demonstrates tmux-like appearance with no visible borders
  */
 const layout: Layout = {
   type: 'split',
@@ -21,7 +22,6 @@ const layout: Layout = {
       id: 'left',
       command: 'bash',
       args: ['-i'],  // Interactive shell
-      title: 'Left Shell',
       focus: true,
     },
     {
@@ -29,13 +29,17 @@ const layout: Layout = {
       id: 'right',
       command: 'bash',
       args: ['-i'],  // Interactive shell
-      title: 'Right Shell',
     },
   ],
 };
 
-console.log('Starting tmux multiplexer...');
-console.log('Use Tab/Shift+Tab to switch panes');
-console.log('Press Ctrl+Q to exit multiplexer\n');
+console.log('Starting tmux-like multiplexer...');
+console.log('Full screen, clean pane appearance (no visible borders)');
+console.log('Press Ctrl+B then ? to see all key bindings');
+console.log('Press Ctrl+C twice to exit safely\n');
 
-render(<Multiplexer layout={layout} width={100} height={25} />);
+// Full screen mode with alternate screen buffer (no scrolling)
+render(<Multiplexer layout={layout} enterFullScreen={true} />, {
+  patchConsole: false,
+  exitOnCtrlC: false,
+});
