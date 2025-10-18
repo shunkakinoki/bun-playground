@@ -113,10 +113,10 @@ const StreamingExample: React.FC = () => {
       </Text>
       <Text dimColor>─────────────────────────────────────</Text>
       <Terminal
-        command="bash"
+        command="sh"
         args={[
           '-c',
-          'for i in {1..10}; do echo "Count: $i"; sleep 0.5; done',
+          'i=1; while [ $i -le 10 ]; do echo "Count: $i"; sleep 0.5; i=$((i+1)); done',
         ]}
         cols={80}
         rows={15}

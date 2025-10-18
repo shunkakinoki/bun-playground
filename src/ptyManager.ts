@@ -103,8 +103,15 @@ export class PtyManager {
 
       // Handle PTY data output
       this.ptyProcess.onData((data: string) => {
+        // Debug: log received data
+        if (process.env.DEBUG_PTY) {
+          console.error('[PTY] Received data:', JSON.stringify(data.substring(0, 100)));
+        }
         // Write data to headless terminal for ANSI parsing
         this.terminal.write(data, () => {
+          if (process.env.DEBUG_PTY) {
+            console.error('[PTY] Write complete, scheduling update');
+          }
           this.scheduleUpdate();
         });
       });
@@ -154,8 +161,15 @@ export class PtyManager {
     if (this.childProcess.stdout) {
       this.childProcess.stdout.on('data', (data: Buffer) => {
         const text = data.toString('utf-8');
+        // Debug: log received data
+        if (process.env.DEBUG_PTY) {
+          console.error('[CHILD_PROCESS] Received data:', JSON.stringify(text.substring(0, 100)));
+        }
         // Write data to headless terminal for ANSI parsing
         this.terminal.write(text, () => {
+          if (process.env.DEBUG_PTY) {
+            console.error('[CHILD_PROCESS] Write complete, scheduling update');
+          }
           // Debounce updates to avoid excessive rendering
           this.scheduleUpdate();
         });

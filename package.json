@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@xterm/headless": "^5.5.0",
-    "bun-pty-rust": "^0.1.0",
+    "bun-pty": "^0.3.2",
+    "bun-pty-rust": "^0.2.1",
     "ink": "^6.3.1",
     "react": "^19.2.0"
   }
