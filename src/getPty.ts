@@ -6,7 +6,7 @@
 export type PtyImplementation = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   module: any;
-  name: 'bun-pty' | 'lydell-node-pty' | 'node-pty';
+  name: 'bun-pty-rust' | 'lydell-node-pty' | 'node-pty';
 } | null;
 
 /**
@@ -15,9 +15,9 @@ export type PtyImplementation = {
  */
 export const getPty = async (): Promise<PtyImplementation> => {
   try {
-    const bunPty = 'bun-pty';
+    const bunPty = 'bun-pty-rust';
     const module = await import(bunPty);
-    return { module, name: 'bun-pty' };
+    return { module, name: 'bun-pty-rust' };
   } catch (_e) {
     try {
       const lydell = '@lydell/node-pty';
